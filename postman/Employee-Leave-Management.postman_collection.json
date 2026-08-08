@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Employee Leave Management System",
+    "_postman_id": "f3a5db9a-4c8b-4b18-a0f2-employee-leave-demo",
+    "description": "Major REST APIs for the Employee Leave Management System. Set baseUrl to http://localhost:8080/api.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api" },
+    { "key": "employeeId", "value": "2" },
+    { "key": "leaveId", "value": "1" },
+    { "key": "departmentId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        { "name": "Login", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"email\": \"employee@example.com\",\n  \"password\": \"Employee@123\"\n}"}, "url": {"raw":"{{baseUrl}}/auth/login","host":["{{baseUrl}}"],"path":["auth","login"]} } },
+        { "name": "Register Employee", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"New Employee\",\n  \"email\": \"new.employee@example.com\",\n  \"password\": \"Employee@123\",\n  \"departmentId\": 1\n}"}, "url": {"raw":"{{baseUrl}}/auth/register","host":["{{baseUrl}}"],"path":["auth","register"]} } }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        { "name": "List Employees", "request": { "method": "GET", "url": "{{baseUrl}}/employees" } },
+        { "name": "Get Employee", "request": { "method": "GET", "url": "{{baseUrl}}/employees/{{employeeId}}" } },
+        { "name": "Create Employee", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"API Employee\",\n  \"email\": \"api.employee@example.com\",\n  \"password\": \"Employee@123\",\n  \"departmentId\": 1,\n  \"role\": \"EMPLOYEE\"\n}"}, "url": "{{baseUrl}}/employees" } },
+        { "name": "Update Employee", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"Updated Employee\",\n  \"email\": \"employee@example.com\",\n  \"departmentId\": 1,\n  \"role\": \"EMPLOYEE\"\n}"}, "url": "{{baseUrl}}/employees/{{employeeId}}" } },
+        { "name": "Delete Employee", "request": { "method": "DELETE", "url": "{{baseUrl}}/employees/{{employeeId}}" } }
+      ]
+    },
+    {
+      "name": "Departments",
+      "item": [
+        { "name": "List Departments", "request": { "method": "GET", "url": "{{baseUrl}}/departments" } },
+        { "name": "Create Department", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"Product\"\n}"}, "url": "{{baseUrl}}/departments" } },
+        { "name": "Update Department", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"Product Engineering\"\n}"}, "url": "{{baseUrl}}/departments/{{departmentId}}" } },
+        { "name": "Delete Department", "request": { "method": "DELETE", "url": "{{baseUrl}}/departments/{{departmentId}}" } }
+      ]
+    },
+    {
+      "name": "Leaves",
+      "item": [
+        { "name": "Create Leave", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"employeeId\": 2,\n  \"leaveType\": \"CASUAL\",\n  \"startDate\": \"2026-09-01\",\n  \"endDate\": \"2026-09-02\",\n  \"reason\": \"Personal work\"\n}"}, "url": "{{baseUrl}}/leaves" } },
+        { "name": "List All Leaves", "request": { "method": "GET", "url": "{{baseUrl}}/leaves" } },
+        { "name": "Employee Leave History", "request": { "method": "GET", "url": "{{baseUrl}}/leaves/employee/{{employeeId}}" } },
+        { "name": "Get Leave", "request": { "method": "GET", "url": "{{baseUrl}}/leaves/{{leaveId}}" } },
+        { "name": "Update Pending Leave", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"employeeId\": 2,\n  \"leaveType\": \"ANNUAL\",\n  \"startDate\": \"2026-09-01\",\n  \"endDate\": \"2026-09-03\",\n  \"reason\": \"Updated personal work\"\n}"}, "url": "{{baseUrl}}/leaves/{{leaveId}}" } },
+        { "name": "Approve Leave", "request": { "method": "PUT", "url": "{{baseUrl}}/leaves/{{leaveId}}/approve" } },
+        { "name": "Reject Leave", "request": { "method": "PUT", "url": "{{baseUrl}}/leaves/{{leaveId}}/reject" } },
+        { "name": "Cancel Pending Leave", "request": { "method": "DELETE", "url": "{{baseUrl}}/leaves/{{leaveId}}" } }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        { "name": "Admin Stats", "request": { "method": "GET", "url": "{{baseUrl}}/dashboard/admin" } }
+      ]
+    }
+  ]
+}
