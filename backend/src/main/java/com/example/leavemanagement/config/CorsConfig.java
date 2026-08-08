@@ -11,14 +11,14 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                    "https://employee-leave-management-frontend-3uii.onrender.com"
+                        "https://employee-leave-management-frontend-3uii.onrender.com"
                 )
                 .allowedMethods(
-                    "GET",
-                    "POST",
-                    "PUT",
-                    "DELETE",
-                    "OPTIONS"
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "OPTIONS"
                 )
                 .allowedHeaders("*")
                 .allowCredentials(true);
